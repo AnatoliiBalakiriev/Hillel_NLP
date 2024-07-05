@@ -104,7 +104,6 @@ cd Hillel_NLP
 ```sh
 poetry install
 ```
-
 3. **Load NLTK resources**:
 
 ```sh
