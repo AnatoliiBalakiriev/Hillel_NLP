@@ -1,4 +1,4 @@
-# FastAPI ML Template
+# Hillel NLP Project
 
 ## Run Web API
 ### Local
@@ -83,6 +83,53 @@ curl --request POST \
 }
 ```
 
+### Group Sentences Endpoint
+
+Send a POST request to `/group_sentences` with the following request body:
+
+#### Example Request
+
+```sh
+curl --request POST \
+  --url http://127.0.0.1:9000/group_sentences \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "sentences": [
+      "The economy is growing at a rapid pace.",
+      "Stocks are up in early morning trading.",
+      "The government is planning a new infrastructure project.",
+      "The movie received excellent reviews from critics.",
+      "The actor won an award for his performance."
+    ]
+  }'
+```
+
+#### Example Response
+
+```json
+{
+  "groups": {
+    "subject": [
+      "The economy is growing at a rapid pace.",
+      "Scientists discovered a new species of bird."
+    ],
+    "line": [
+      "Stocks are up in early morning trading."
+    ],
+    "state": [
+      "The government is planning a new infrastructure project.",
+      "The movie received excellent reviews from critics."
+    ],
+    "game": [
+      "The actor won an award for his performance."
+    ],
+    "file": [
+      "The research paper was published in a renowned journal."
+    ]
+  }
+}
+```
+
 ## Development
 ### Run Tests and Linter
 
@@ -118,5 +165,5 @@ poetry run python -c "import nltk; nltk.download('punkt'); nltk.download('stopwo
 
 ## Reference
 
-- [tiangolo/full\-stack\-fastapi\-postgresql: Full stack, modern web application generator\. Using FastAPI, PostgreSQL as database, Docker, automatic HTTPS and more\.](https://github.com/tiangolo/full-stack-fastapi-postgresql)
-- [eightBEC/fastapi\-ml\-skeleton: FastAPI Skeleton App to serve machine learning models production\-ready\.](https://github.com/eightBEC/fastapi-ml-skeleton)
+- [tiangolo/full\\-stack\\-fastapi\\-postgresql: Full stack, modern web application generator\\. Using FastAPI, PostgreSQL as database, Docker, automatic HTTPS and more\\.](https://github.com/tiangolo/full-stack-fastapi-postgresql)
+- [eightBEC/fastapi\\-ml\\-skeleton: FastAPI Skeleton App to serve machine learning models production\\-ready\\.](https://github.com/eightBEC/fastapi-ml-skeleton)

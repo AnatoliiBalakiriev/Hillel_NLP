@@ -20,5 +20,4 @@ app.add_event_handler("shutdown", stop_app_handler(app))
 if __name__ == "__main__":
     # Use this for debugging purposes only
     import uvicorn
-
     uvicorn.run(app, host="0.0.0.0", port=8001, log_level="debug")
