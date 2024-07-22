@@ -23,12 +23,40 @@ $ docker compose up --build
 
 ### Predict Endpoint
 
+The `/predict` endpoint preprocesses the text using the `nltk` method before prediction.
+
+#### Example Request
+
 ```sh 
-$ curl --request POST --url http://127.0.0.1:9000/api/v1/predict --header 'Content-Type: application/json' --data '{"input_text": "test"}'
+$ curl --request POST --url http://127.0.0.1:9000/api/v1/predict --header 'Content-Type: application/json' --data '{"input_text": "This is a test text."}'
 ```
 
 ```sh
-$ http POST http://127.0.0.1:9000/api/v1/predict input_text=test
+$ http POST http://127.0.0.1:9000/api/v1/predict input_text="This is a test text."
+```
+
+### Preprocess Endpoint
+
+The `/preprocess` endpoint performs text preprocessing using the `nltk` or `spacy` method, depending on the `method` argument passed.
+
+#### Example Request (nltk)
+
+```sh 
+$ curl --request POST --url http://127.0.0.1:9000/api/v1/preprocess?method=nltk --header 'Content-Type: application/json' --data '{"input_text": "This is a test text."}'
+```
+
+```sh
+$ http POST http://127.0.0.1:9000/api/v1/preprocess method=nltk input_text="This is a test text."
+```
+
+#### Example Request (spacy)
+
+```sh 
+$ curl --request POST --url http://127.0.0.1:9000/api/v1/preprocess?method=spacy --header 'Content-Type: application/json' --data '{"input_text": "This is a test text."}'
+```
+
+```sh
+$ http POST http://127.0.0.1:9000/api/v1/preprocess method=spacy input_text="This is a test text."
 ```
 
 ### Similarity Endpoint
@@ -133,7 +161,7 @@ curl --request POST \
 ## Development
 ### Run Tests and Linter
 
-```
+```sh
 $ poetry run tox
 ```
 
@@ -151,10 +179,11 @@ cd Hillel_NLP
 ```sh
 poetry install
 ```
-3. **Load NLTK resources**:
+3. **Load NLTK and spaCy resources**:
 
 ```sh
 poetry run python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')"
+poetry run python -m spacy download en_core_web_sm
 ```
 
 4. **Run the application**:

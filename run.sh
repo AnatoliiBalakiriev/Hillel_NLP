@@ -20,6 +20,14 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# Loading spaCy model
+echo "Loading spaCy model..."
+poetry run python -m spacy download en_core_web_sm
+if [ $? -ne 0 ]; then
+  echo "Error during spaCy model download"
+  exit 1
+fi
+
 # Checking and training models if not present
 echo "Checking and training models if not present..."
 poetry run python -c "
@@ -49,7 +57,7 @@ fi
 
 # Starting the FastAPI server
 echo "Starting FastAPI server..."
-poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 7010
+poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 7013
 if [ $? -ne 0 ]; then
   echo "Error during FastAPI server start"
   exit 1
