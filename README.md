@@ -1,3 +1,6 @@
+Ось оновлений файл `README.md`, який включає новий ендпоінт для роботи з Mistral:
+
+```markdown
 # Hillel NLP Project
 
 ## Run Web API
@@ -158,6 +161,30 @@ curl --request POST \
 }
 ```
 
+### Mistral Model Endpoint
+
+The `/mistral/query` endpoint allows interaction with the Mistral 7B Instruct model, providing natural language processing capabilities.
+
+#### Example Request
+
+```sh
+curl --request POST \
+  --url http://127.0.0.1:9000/mistral/query/ \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "prompt": "Explain Machine Learning to me in a nutshell.",
+    "max_new_tokens": 64
+  }'
+```
+
+#### Example Response
+
+```json
+{
+  "response": "Machine Learning is a field of AI that enables computers to learn from data and improve performance over time without being explicitly programmed."
+}
+```
+
 ## Development
 ### Run Tests and Linter
 
@@ -186,7 +213,11 @@ poetry run python -c "import nltk; nltk.download('punkt'); nltk.download('stopwo
 poetry run python -m spacy download en_core_web_sm
 ```
 
-4. **Run the application**:
+4. **Download Mistral 7B Instruct Model**:
+
+The model and tokenizer will be automatically downloaded and unpacked on the first run of the application if not already present.
+
+5. **Run the application**:
 
 ```sh
 ./run.sh
@@ -196,3 +227,4 @@ poetry run python -m spacy download en_core_web_sm
 
 - [tiangolo/full\\-stack\\-fastapi\\-postgresql: Full stack, modern web application generator\\. Using FastAPI, PostgreSQL as database, Docker, automatic HTTPS and more\\.](https://github.com/tiangolo/full-stack-fastapi-postgresql)
 - [eightBEC/fastapi\\-ml\\-skeleton: FastAPI Skeleton App to serve machine learning models production\\-ready\\.](https://github.com/eightBEC/fastapi-ml-skeleton)
+```

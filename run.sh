@@ -57,7 +57,7 @@ fi
 
 # Starting the FastAPI server
 echo "Starting FastAPI server..."
-poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 7013
+poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 7008
 if [ $? -ne 0 ]; then
   echo "Error during FastAPI server start"
   exit 1
