@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-textdistance
-scikit-learn
-joblib
-pandas
-nltk
-numpy<1.27

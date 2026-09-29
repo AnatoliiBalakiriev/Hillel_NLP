@@ -1,4 +1,6 @@
 import os
+from contextlib import asynccontextmanager
+
 import torch
 from fastapi import FastAPI
 from mistral_inference.transformer import Transformer
@@ -35,16 +37,21 @@ mistral_tokenizer = MistralTokenizer.from_file(os.path.expanduser("~") + "/mistr
 device = torch.device("cpu")
 model = Transformer.from_folder(os.path.expanduser("~") + "/mistral_7b_instruct_v3").to(device)
 
-app = FastAPI(title=settings.PROJECT_NAME)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    start_app_handler(app, settings.MODEL_PATH)()
+    yield
+    stop_app_handler(app)()
+
+
+app = FastAPI(title=settings.PROJECT_NAME, lifespan=lifespan)
 
 app.include_router(heartbeat_router)
 app.include_router(api_router, prefix=settings.API_V1_STR, tags=["ML API"])
 app.include_router(mistral_router, prefix="/mistral", tags=["Mistral API"])
 app.include_router(similarity_router)
 app.include_router(classification_router, prefix="/classification", tags=["Classification"])
-
-app.add_event_handler("startup", start_app_handler(app, settings.MODEL_PATH))
-app.add_event_handler("shutdown", stop_app_handler(app))
 
 if __name__ == "__main__":
     # Use this for debugging purposes only
