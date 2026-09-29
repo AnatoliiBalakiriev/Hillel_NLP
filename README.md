@@ -209,7 +209,7 @@ poetry install
 3. **Load NLTK and spaCy resources**:
 
 ```sh
-poetry run python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')"
+poetry run python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab'); nltk.download('stopwords'); nltk.download('wordnet')"
 poetry run python -m spacy download en_core_web_sm
 ```
 

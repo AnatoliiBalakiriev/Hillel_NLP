@@ -9,6 +9,7 @@ import spacy
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
+nltk.download('punkt_tab')
 
 # Download the English spaCy model
 nlp = spacy.load("en_core_web_sm")

@@ -14,7 +14,7 @@ fi
 
 # Loading NLTK resources
 echo "Loading NLTK resources..."
-poetry run python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')"
+poetry run python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab'); nltk.download('stopwords'); nltk.download('wordnet')"
 if [ $? -ne 0 ]; then
   echo "Error during NLTK resources download"
   exit 1
